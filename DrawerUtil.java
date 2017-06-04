@@ -1,10 +1,8 @@
 package sample;
 
-import javafx.scene.canvas.*;
-import javafx.*;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.ArcType;
 
-import java.awt.*;
-import java.awt.Canvas;
 import java.util.Random;
 
 /**
@@ -20,12 +18,19 @@ public class DrawerUtil {
 
     public javafx.scene.canvas.Canvas DrawRandom(int times)
     {
-
         Random random = new Random();
+
+        int FigureToDraw = random.nextInt(4);
+
+        int angle = random.nextInt(360);
+
         int pointDeDepartX = random.nextInt(300);
         int pointDeDepartY = random.nextInt(300);
         int pointDArriveeX = random.nextInt(300);
         int pointDArriveeY = random.nextInt(300);
+
+        int middlePointX = random.nextInt(300);
+        int middlePointY = random.nextInt(300);
 
         int RColor = random.nextInt(255);
         int GColor = random.nextInt(255);
@@ -33,12 +38,22 @@ public class DrawerUtil {
 
         javafx.scene.paint.Color RandomColor = javafx.scene.paint.Color.rgb(RColor,GColor,BColor);
 
-
-
         GraphicsContext ctx = canvas.getGraphicsContext2D();
 
         ctx.setStroke(RandomColor);
-        ctx.strokeLine(pointDeDepartX, pointDeDepartY, pointDArriveeX, pointDArriveeY);
+
+        switch (FigureToDraw) {
+            case 1:
+                ctx.strokeLine(pointDeDepartX, pointDeDepartY, pointDArriveeX, pointDArriveeY);
+                break;
+            case 2:
+                ctx.strokeArc(pointDeDepartX, pointDeDepartY, middlePointX, middlePointY, pointDArriveeX, pointDArriveeY, ArcType.ROUND);
+                break;
+            case 3:
+                ctx.strokeArc(pointDeDepartX, pointDeDepartY, middlePointX, middlePointY, pointDArriveeX, pointDArriveeY, ArcType.OPEN);
+                break;
+        }
+
         if(times!=0)
         {
             DrawRandom(--times);

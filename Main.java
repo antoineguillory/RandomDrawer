@@ -11,6 +11,10 @@ import java.util.Random;
 
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -19,13 +23,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 300, 300));
         DrawerUtil drawUtil = new DrawerUtil();
         Random rdm = new Random();
-        grp.getChildren().add(drawUtil.DrawRandom(rdm.nextInt(175)));
+        grp.getChildren().add(drawUtil.DrawRandom(rdm.nextInt(150)));
         primaryStage.setScene(new Scene(grp));
         primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
